@@ -18,16 +18,16 @@ const getData = graphql`
 `
 
 const Header = () => {
-    // const data = useStaticQuery(getData);
-    const { site: { info: { title, person: { name, age } } } } = useStaticQuery(getData)
-    return (
-        <div>
-            {/* <h1>Title : {data.site.info.title} </h1> */}
-            {/* <h1>Name : {data.site.info.person.name} </h1> */}
-            <h1>Title : {title} </h1>
-            <h1>Name : {name} </h1>
-        </div>
-    )
+  // const data = useStaticQuery(getData);
+  const { site: { info: { title, person: { name } } } } = useStaticQuery(getData)
+  return (
+    <div>
+      {/* <h1>Title : {data.site.info.title} </h1> */}
+      {/* <h1>Name : {data.site.info.person.name} </h1> */}
+      <h1>Title : {title} </h1>
+      <h1>Name : {name} </h1>
+    </div>
+  )
 }
 
 export default Header
