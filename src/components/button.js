@@ -5,6 +5,7 @@ background-color: blue;
 border-radius:3px;
 border: 1px solid blue;
 color: white;
-font-size: 1.5rem;
+font-size: 1.1rem;
 text-transform: capitalize;
+padding: 5px;
 `
