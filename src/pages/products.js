@@ -1,16 +1,44 @@
-import React from 'react'
-import Layout from '../components/layout'
+import React from "react"
+import { graphql } from "gatsby"
+import Layout from '../components/layout';
 import styles from '../components/products.module.css';
+import Image from 'gatsby-image';
+import { Link } from "gatsby";
 
-const products = () => {
-    return (
-        <Layout>
-            <div className={styles.page}>
-                <h1>This is our products</h1>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo incidunt beatae dolore porro? Voluptatem quod pariatur reprehenderit numquam excepturi, saepe veritatis natus repellendus ullam eos!</p>
-            </div>
-        </Layout>
-    )
+
+const ComponentName = ({ data }) => {
+    const { allContentfulProduct: { nodes: products }, } = data
+    return <Layout>
+        <section className={styles.page} >
+            {products.map((product) => {
+                return (
+                    <article key={product.id}>
+                        <Image fluid={product.image.fluid} alt={product.title} />
+                        <h4>{product.title} <span>$ {product.price} </span> </h4>
+                        <Link to={`/products/${product.slug}`}>More Details...</Link>
+                    </article>)
+            })}
+
+        </section>
+    </Layout>
 }
 
-export default products
+export const query = graphql`
+  {
+    allContentfulProduct {
+      nodes {
+        id
+        slug
+        price
+        title
+        image {
+          fluid {
+            ...GatsbyContentfulFluid
+          }
+        }
+      }
+    }
+  }
+`
+
+export default ComponentName
